@@ -16,4 +16,12 @@ model User {
   lastName  String
   age       Int
   name      String?
+  invoices  Invoice[]
+}
+
+model Invoice {
+  id        Int     @id @default(autoincrement())
+  name      String?
+  userId    Int?
+  user      User?   @relation(fields: [userId], references: [id])
 }

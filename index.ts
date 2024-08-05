@@ -18,6 +18,19 @@ async function main() {
     const users = await prisma.user.findMany();
     console.log("Loaded users: ", users);
 
+    const invoice = await prisma.invoice.create({
+        data: {
+            name: "new invoice",
+            user: {connect: users[0]}
+        },
+        select: { id: true }
+    });
+    console.log("Created a new invoice with id: " + user.id);
+    
+    console.log("Loading invoices from the database...");
+    const invoices = await prisma.invoice.findMany();
+    console.log("Loaded invoices: ", invoices);
+
     console.log(
         "Here you can setup and run express / fastify / any other framework."
     );
